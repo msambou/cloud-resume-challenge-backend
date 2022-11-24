@@ -19,13 +19,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
+      # Install Node
       - uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'npm'
 
+      # Install Dependencies for Serverless Application Model
       - run: npm i -g serverless
 
+      # Deploy Application
       - name: Deploy
         run: sls deploy
 
