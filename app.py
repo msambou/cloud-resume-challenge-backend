@@ -20,7 +20,7 @@ quotes = [
 app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
-def get_random_quote():
+def get_greetings():
     return "Hello and Welcome to Mike's Cloud Resume Challenge. -1"
  
 @app.route("/quote", methods=["GET"])
