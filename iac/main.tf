@@ -10,12 +10,13 @@ provider "aws" {
 resource "aws_dynamodb_table" "dt" {
   name         = "cloud-resume-challenge"
   billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "totalCount"
+  hash_key     = "id"
 
   attribute {
-    name = "totalCount"
+    name = "id"
     type = "N"
   }
+  
   tags = {
     key   = "Project"
     value = "cloud-resume-challenge"
