@@ -1,25 +1,18 @@
 service: quotes #name this whatever you want
 
 provider:
- name: aws
- profile: initial-aws-account
- runtime: python3.8
- region: us-east-2
- memorySize: 128
-plugins:
-  - serverless-wsgi
-  - serverless-python-requirements	
-custom:
- wsgi:
-   app: app.app
-   packRequirements: false
+  name: aws
+  region: us-east-2
+  ecr:
+    images:
+      appimage:
+        path: ./
+
 functions:
- app:
-   handler: wsgi_handler.handler
-   events:
-     - http: ANY /
-     - http: 'ANY {proxy+}'
-package:
-  exclude:
-    - node_modules/**
-    - env/**
+  app:
+    image:
+      name: appimage
+    timeout: 30
+    events:
+      - http: ANY /
+      - http: 'ANY /{proxy+}'

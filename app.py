@@ -3,6 +3,7 @@ from collections import namedtuple
 from random import choice
  
 from flask import Flask, jsonify
+import serverless_wsgi
  
 Quote = namedtuple("Quote", ("text", "author"))
  
@@ -17,8 +18,14 @@ quotes = [
 ]
  
 app = Flask(__name__)
- 
+
+@app.route("/", methods=["GET"])
+def get_random_quote():
+    return "Hello and Welcome to Mike's Cloud Resume Challenge. -1"
  
 @app.route("/quote", methods=["GET"])
 def get_random_quote():
     return jsonify(choice(quotes)._asdict())
+
+def handler(event, context):
+    return serverless_wsgi.handle_request(app, event, context)
