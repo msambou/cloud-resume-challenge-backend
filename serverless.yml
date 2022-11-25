@@ -1,4 +1,4 @@
-service: quotes #name this whatever you want
+service: cloud-resume-challenge
 
 provider:
   name: aws
