@@ -25,16 +25,7 @@ def get_greetings():
 @app.route("/view-count", methods=["GET"])
 def get_view_count():
     response = database.get_count()
-    return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        },
-        'body': json.dumps(6)
-    }
-    # return jsonify(response)
+    return jsonify(response)
 
 @app.route("/view-count", methods=["PUT"])
 def update_view_count():
