@@ -5,6 +5,7 @@ class Database:
     def __init__(self):
         self.client = boto3.resource('dynamodb', 'us-east-2')
         self.table = self.client.Table("cloud-resume-challenge")
+        
 
     """
     Function to get total resume views
