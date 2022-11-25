@@ -5,10 +5,16 @@ from random import choice
 from flask import Flask, jsonify
 import serverless_wsgi
 from Database import Database
+import json
 
 # Instantiate Database
 database = Database()
 
+cors_headers = {
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PUT'
+}
  
 app = Flask(__name__)
 
@@ -19,12 +25,22 @@ def get_greetings():
 @app.route("/view-count", methods=["GET"])
 def get_view_count():
     response = database.get_count()
-    return jsonify(response)
+    return {
+        'statusCode': response.status_code,
+        'headers': cors_headers,
+        'body': json.dumps(response)
+    }
+    # return jsonify(response)
 
 @app.route("/view-count", methods=["PUT"])
 def update_view_count():
     response = database.increment_count()
-    return jsonify(response)
+    return {
+        'statusCode': response.status_code,
+        'headers': cors_headers,
+        'body': json.dumps(response)
+    }
+    # return jsonify(response)
 
 def handler(event, context):
     return serverless_wsgi.handle_request(app, event, context)
