@@ -26,7 +26,7 @@ def get_greetings():
 def get_view_count():
     response = database.get_count()
     return {
-        'statusCode': response.status_code,
+        'statusCode': response["status_code"],
         'headers': cors_headers,
         'body': json.dumps(response)
     }
@@ -36,7 +36,7 @@ def get_view_count():
 def update_view_count():
     response = database.increment_count()
     return {
-        'statusCode': response.status_code,
+        'statusCode': response["status_code"],
         'headers': cors_headers,
         'body': json.dumps(response)
     }
