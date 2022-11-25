@@ -14,9 +14,5 @@ functions:
       name: appimage
     timeout: 30
     events:
-      - http: 
-          path: ANY /
-          cors: true
-      - http:
-          path: 'ANY /{proxy+}'
-          cors: true
+      - http: ANY /
+      - http: 'ANY /{proxy+}'
