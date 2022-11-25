@@ -25,22 +25,12 @@ def get_greetings():
 @app.route("/view-count", methods=["GET"])
 def get_view_count():
     response = database.get_count()
-    return {
-        'statusCode': response["status_code"],
-        'headers': cors_headers,
-        'body': json.dumps(response)
-    }
-    # return jsonify(response)
+    return jsonify(response)
 
 @app.route("/view-count", methods=["PUT"])
 def update_view_count():
     response = database.increment_count()
-    return {
-        'statusCode': response["status_code"],
-        'headers': cors_headers,
-        'body': json.dumps(response)
-    }
-    # return jsonify(response)
+    return jsonify(response)
 
 def handler(event, context):
     return serverless_wsgi.handle_request(app, event, context)
